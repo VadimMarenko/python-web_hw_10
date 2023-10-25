@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "python-web-hw-10"
+version = "0.1.0"
+description = ""
+authors = ["Vadim Marenko <vadim.marenko@gmail.com>"]
+license = "MIT License"
+readme = "README.md"
+packages = [{include = "python_web_hw_10"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+django = "^4.2.6"
+bson = "^0.5.10"
+pymongo = "^4.5.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
