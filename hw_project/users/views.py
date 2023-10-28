@@ -14,10 +14,10 @@ class RegisterView(View):
 
     def post(self, request):
         form = self.form_class(request.POST)
-        print(form)
+
         if form.is_valid():
             form.save()
-            username = form.cleaned_data("username")
+            username = form.cleaned_data["username"]
             messages.success(
                 request, f"Вітаємо {username}. Ваш аккаунт успішно створено"
             )

@@ -43,11 +43,11 @@ class RegisterForm(UserCreationForm):
         )
 
 
-class LoginForm(UserCreationForm):
+class LoginForm(AuthenticationForm):
     username = CharField(
         max_length=100, required=True, widget=TextInput(attrs={"class": "form-control"})
     )
-    password1 = CharField(
+    password = CharField(
         max_length=20,
         min_length=8,
         required=True,
@@ -56,7 +56,7 @@ class LoginForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = (
+        fields = [
             "username",
             "password",
-        )
+        ]
