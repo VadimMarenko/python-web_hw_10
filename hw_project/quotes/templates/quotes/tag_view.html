@@ -28,11 +28,18 @@
     </nav>
   </div>
   <div class="col-md-4 tags-box">
+    {% load custom_filters %}
     <h2>Top Ten tags</h2>
-
+    {% for tag in top_tags %}
     <span class="tag-item">
-      <a class="tag" style="font-size: 28px" href="/tag/{{ tag }}">{{ tag }}</a>
+      <a
+        class="tag"
+        style="font-size: {{ tag.tag_count|times:2 }}px"
+        href="/tag/{{ tag }}"
+        >{{ tag }}</a
+      >
     </span>
+    {% endfor %}
   </div>
 </div>
 {% endblock %}

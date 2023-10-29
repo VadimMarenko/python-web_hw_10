@@ -94,3 +94,12 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
     text-align: justify;
     margin-bottom: 20px;
 }
+
+.tags-box {
+    text-align: right;
+}
+
+.tag-item {
+    display: block;
+    margin: 4px;
+}

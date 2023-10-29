@@ -16,7 +16,18 @@ def main(request, page=1):
     per_page = 10
     paginator = Paginator(list(quotes), per_page)
     quotes_on_page = paginator.page(page)
-    return render(request, "quotes/index.html", context={"quotes": quotes_on_page})
+    top_tags = Tag.objects.annotate(tag_count=Count("quote")).order_by("-tag_count")[
+        :10
+    ]
+
+    return render(
+        request,
+        "quotes/index.html",
+        context={
+            "top_tags": top_tags,
+            "quotes": quotes_on_page,
+        },
+    )
 
 
 def author(request, author_name):
@@ -33,23 +44,18 @@ def tag(request, tag_name):
     # db = get_mongo_db()
     # quotes = db.quotes.find({"tags": tag_name})
     quotes = Quote.objects.filter(tags__name=tag_name).order_by("-created_at")
+    top_tags = Tag.objects.annotate(tag_count=Count("quote")).order_by("-tag_count")[
+        :10
+    ]
     return render(
         request,
         "quotes/tag_view.html",
         context={
+            "top_tags": top_tags,
             "tag_name": tag_name,
             "quotes": quotes,
         },
     )
-
-
-def top_tags(request):
-    top_tags = (
-        Tag.objects.all()
-        .annotate(quote_count=Count("quote"))
-        .order_by("-quote_count")[:10]
-    )
-    return render(request, "top_tags.html", {"top_tags": top_tags})
 
 
 @login_required
